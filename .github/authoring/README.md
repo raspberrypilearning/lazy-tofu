@@ -26,9 +26,9 @@ Both are embedded with Scratch's project player, with direct links as an alterna
 
 ## Source code and assets
 
-The supplied starter SB3 is copied byte-for-byte from the editor repository. The offline completed project is also unchanged and retains the tested fixes from that version: deterministic setup, remembered wake-up keypress, safe positive speed values and reachable grass-clone cleanup.
+The supplied starter SB3 is copied byte-for-byte from the editor repository. The offline completed project uses Mark's updated `Lazy Tofu! (1).sb3`: four breathing cycles, followed by a space-key wait. It retains deterministic setup, safe positive speed values and reachable grass-clone cleanup.
 
-The published Scratch completed game has the original 254-block implementation. The tutorial and offline solution retain the 259-block reliability revision already made for the editor guide; all gameplay features, animations and sounds remain. The externally supplied Scratch projects were not edited.
+Mark updated the published Scratch completed game to the 255-block version with `repeat (4)` followed by `wait until <key (space) pressed?>`. The tutorial and 258-block offline solution use that same sleeping sequence, with the existing setup and clone-cleanup fixes retained. The earlier `awake` variable and keypress script have been removed. All gameplay features, animations and sounds remain; this workflow did not edit the online Scratch projects.
 
 Code folders use the `lazy-tofu-starter` and `lazy-tofu-complete` identifiers. Both project YAML files retain `build: true`, as requested. Their `code_editor_scratch` build type creates the optional code artefacts; it does not choose the tutorial's presentation. Dino Jump's classic repository likewise builds a code-editor starter while presenting a normal Scratch tutorial.
 

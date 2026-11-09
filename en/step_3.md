@@ -1,6 +1,6 @@
 ## Make Tofu swim
 
-Start by getting Tofu swimming. You'll add the nap and the jump into the river later.
+Start by getting Tofu swimming. You'll add the sleeping animation and the jump into the river later.
 
 > [!TASK]
 >

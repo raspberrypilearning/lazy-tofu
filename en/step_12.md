@@ -44,7 +44,7 @@ Add the final sounds and give the player control of the river's speed.
 
 > [!TASK]
 >
-> **Test your project.** Click the green flag and wake Tofu. Music should play during the nap and the game. Pressing space should squeak too.
+> **Test your project.** Click the green flag, wait for the four breaths, then press space to wake Tofu. Music should play during the sleeping animation and the game. Pressing space should squeak too.
 >
 > Start at speed `1`, then move the slider up a little. Plants, ripples and objects move faster, and appear more often. Choose a speed that gives you time to dodge and collect food.
 >

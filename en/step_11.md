@@ -55,7 +55,7 @@ Finish the opening with a waddle, a jump and a splash.
 
 > [!TASK]
 >
-> **Test your project.** Click the green flag and press space. Tofu wakes, waves, waddles down the bank, jumps and makes a splash. Swimming and scenery should begin after the splash.
+> **Test your project.** Click the green flag, wait for the four breaths, then press space. Tofu wakes, waves, waddles down the bank, jumps and makes a splash. Swimming and scenery should begin after the splash.
 >
 > Try restarting during the animation too. Tofu should return to the sleeping position, size and rotation style.
 

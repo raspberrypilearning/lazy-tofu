@@ -2,7 +2,7 @@
 
 Build a **Lazy Tofu!** game in Scratch. Help Tofu the Platypus swim for food while avoiding the trees and rubbish in the river.
 
-Click the green flag, then use **space** to wake Tofu. Use the **left and right arrow keys** to swim. Food adds points; rubbish and trees cost health. Try the speed slider when you're ready for a faster river.
+Click the green flag and watch Tofu take four sleepy breaths. Press **space** to wake Tofu, then use the **left and right arrow keys** to swim. Food adds points; rubbish and trees cost health. Try the speed slider when you're ready for a faster river.
 
 > [!NOPRINT]
 >

@@ -1,17 +1,6 @@
 ## Wake Tofu up
 
-Your game works. Now add Tofu's nap and wave before the swimming begins.
-
-> [!TASK]
->
-> On **Tofu**, create a variable called `awake`{:class="block3variables"}, **For this sprite only**, and untick its checkbox.
->
-> Use `0` for asleep and `1` for awake. Make a separate script to remember when the player presses space:
->
-> ```blocks3
-> when [space v] key pressed
-> set [awake v] to (1)
-> ```
+Your game works. Now add Tofu's sleeping animation and wave before the swimming begins.
 
 > [!TASK]
 >
@@ -26,9 +15,8 @@ Your game works. Now add Tofu's nap and wave before the swimming begins.
 > point in direction (90)
 > set rotation style [left-right v]
 > show
-> set [awake v] to (0)
 > switch costume to (tofu-sleeping v)
-> wait until <(awake) = (1)>
+> wait until <key (space v) pressed?>
 > go to x: (0) y: (0)
 > broadcast (start v)
 > ```
@@ -39,12 +27,12 @@ Your game works. Now add Tofu's nap and wave before the swimming begins.
 
 > [!TASK]
 >
-> Replace the opening script's `wait until`{:class="block3control"} with a `repeat until`{:class="block3control"} loop, keeping the condition `awake = 1`.
+> Add a `repeat (4)`{:class="block3control"} loop before the opening script's `wait until`{:class="block3control"} block.
 >
-> Start `Snoring`, then use two repeat loops to grow and shrink Tofu gently. Keep the position change and broadcast after the outer loop.
+> Inside it, start `Snoring`, then use two repeat loops to grow and shrink Tofu gently. Keep the space-key wait **outside and after** the outer loop, followed by the position change and broadcast.
 >
 > ```blocks3
-> repeat until <(awake) = (1)>
+> repeat (4)
 > start sound (Snoring v)
 > repeat (10)
 > wait (0.04) seconds
@@ -55,13 +43,14 @@ Your game works. Now add Tofu's nap and wave before the swimming begins.
 > change size by (-1)
 > end
 > end
+> wait until <key (space v) pressed?>
 > ```
 >
-> Each breath adds ten to Tofu's size and takes ten away again. The separate key-press script remembers a quick press, so Tofu can finish the breath before waking.
+> Each breath adds ten to Tofu's size and takes ten away again. Tofu completes all four breaths, then waits for the player to press space.
 
 > [!TASK]
 >
-> After the whole sleeping loop, before the final `go to x: (0) y: (0)`{:class="block3motion"}, add a wave.
+> After `wait until <key (space) pressed?>`{:class="block3control"}, before the final `go to x: (0) y: (0)`{:class="block3motion"}, add a wave.
 >
 > ```blocks3
 > switch costume to (tofu v)
@@ -75,6 +64,6 @@ Your game works. Now add Tofu's nap and wave before the swimming begins.
 
 > [!TASK]
 >
-> **Test your project.** Click the green flag. Tofu snores and breathes on the bank. Press space: Tofu finishes the breath, wakes, waves, then starts swimming.
+> **Test your project.** Click the green flag. Tofu snores and takes four breaths, then waits on the bank. Press space after the breaths: Tofu wakes, waves, then starts swimming.
 
 > [!SAVE]

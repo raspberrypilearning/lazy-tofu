@@ -45,6 +45,65 @@ def make_block(opcode, **extra):
     }
 
 
+def discard_reporter(target, block_id):
+    block = target["blocks"].pop(block_id, None)
+    if block:
+        for value in block["inputs"].values():
+            for reference in value[1:]:
+                if isinstance(reference, str):
+                    discard_reporter(target, reference)
+
+
+def configure_sleep_cycle(tofu, costume_id):
+    """Use four complete breaths, then wait for the space key."""
+    blocks = tofu["blocks"]
+    sleep_id = blocks[costume_id]["next"]
+    sleep = blocks[sleep_id]
+    if sleep["opcode"] not in ("control_repeat", "control_repeat_until"):
+        raise ValueError("Expected a breathing loop after the sleeping costume")
+    body = sleep["inputs"]["SUBSTACK"]
+    condition = sleep["inputs"].get("CONDITION")
+    if condition:
+        discard_reporter(tofu, condition[1])
+
+    after_sleep = sleep["next"]
+    if blocks[after_sleep]["opcode"] == "control_wait_until":
+        old_wait = blocks[after_sleep]
+        after_wait = old_wait["next"]
+        if after_sleep != "lazy-tofu-wake-wait":
+            discard_reporter(tofu, old_wait["inputs"]["CONDITION"][1])
+            del blocks[after_sleep]
+    else:
+        after_wait = after_sleep
+
+    tofu["variables"].pop("lazy-tofu-awake", None)
+    for block_id in (
+        "lazy-tofu-awake-reset", "lazy-tofu-wake-key",
+        "lazy-tofu-wake-set", "lazy-tofu-awake-check",
+    ):
+        blocks.pop(block_id, None)
+
+    sleep["opcode"] = "control_repeat"
+    sleep["inputs"] = {"TIMES": [1, [6, "4"]], "SUBSTACK": body}
+    wait_id = "lazy-tofu-wake-wait"
+    key_id = "lazy-tofu-wake-space"
+    menu_id = "lazy-tofu-wake-space-menu"
+    blocks[wait_id] = make_block(
+        "control_wait_until", parent=sleep_id, next=after_wait,
+        inputs={"CONDITION": [2, key_id]},
+    )
+    blocks[key_id] = make_block(
+        "sensing_keypressed", parent=wait_id,
+        inputs={"KEY_OPTION": [1, menu_id]},
+    )
+    blocks[menu_id] = make_block(
+        "sensing_keyoptions", parent=key_id, shadow=True,
+        fields={"KEY_OPTION": ["space", None]},
+    )
+    blocks[after_wait]["parent"] = wait_id
+    return sleep_id, wait_id
+
+
 def save_project(destination, project, assets):
     destination.parent.mkdir(parents=True, exist_ok=True)
     payloads = {"project.json": json.dumps(project, separators=(",", ":")).encode()}
@@ -108,36 +167,13 @@ def main():
         tofu, "looks_switchcostumeto",
         lambda b: tofu["blocks"][b["inputs"]["COSTUME"][1]]["fields"]["COSTUME"][0] == "tofu-sleeping",
     )
-    rest_id = tofu["blocks"][costume_id]["next"]
-    awake_id = "lazy-tofu-awake"
-    tofu["variables"][awake_id] = ["awake", 0]
-    tofu["blocks"]["lazy-tofu-awake-reset"] = make_block(
-        "data_setvariableto", inputs={"VALUE": [1, [4, "0"]]}, fields={"VARIABLE": ["awake", awake_id]},
-    )
-    tofu["blocks"]["lazy-tofu-wake-key"] = make_block(
-        "event_whenkeypressed", fields={"KEY_OPTION": ["space", None]}, topLevel=True, x=520, y=0,
-    )
-    tofu["blocks"]["lazy-tofu-wake-set"] = make_block(
-        "data_setvariableto", inputs={"VALUE": [1, [4, "1"]]}, fields={"VARIABLE": ["awake", awake_id]},
-    )
-    chain(tofu, ["lazy-tofu-wake-key", "lazy-tofu-wake-set"])
-    old_condition = tofu["blocks"][rest_id]["inputs"]["CONDITION"][1]
-    if tofu["blocks"][old_condition]["opcode"] == "sensing_keypressed":
-        old_menu = tofu["blocks"][old_condition]["inputs"]["KEY_OPTION"][1]
-        del tofu["blocks"][old_menu]
-        del tofu["blocks"][old_condition]
-    tofu["blocks"]["lazy-tofu-awake-check"] = make_block(
-        "operator_equals", parent=rest_id,
-        inputs={"OPERAND1": [3, [12, "awake", awake_id], [10, ""]], "OPERAND2": [1, [10, "1"]]},
-    )
-    tofu["blocks"][rest_id]["inputs"]["CONDITION"] = [2, "lazy-tofu-awake-check"]
+    rest_id, wake_wait_id = configure_sleep_cycle(tofu, costume_id)
     tofu["blocks"]["lazy-tofu-rotation-reset"] = make_block(
         "motion_setrotationstyle", fields={"STYLE": ["left-right", None]},
     )
     tofu["blocks"]["lazy-tofu-show"] = make_block("looks_show")
-    chain(tofu, [flag_id, position_id, size_id, direction_id, "lazy-tofu-rotation-reset", "lazy-tofu-show", "lazy-tofu-awake-reset", costume_id, rest_id])
-    # The repeat-until block continues into the original wake-up and jump sequence.
-    tofu["blocks"][rest_id]["next"] = original["targets"][1]["blocks"][rest_id]["next"]
+    chain(tofu, [flag_id, position_id, size_id, direction_id, "lazy-tofu-rotation-reset", "lazy-tofu-show", costume_id, rest_id])
+    tofu["blocks"][rest_id]["next"] = wake_wait_id
     tofu["size"] = 23
 
     for name in ("water-ripples", "objects"):
