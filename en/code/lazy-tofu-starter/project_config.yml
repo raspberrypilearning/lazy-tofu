@@ -1,0 +1,4 @@
+name: "Lazy Tofu! starter"
+identifier: "lazy-tofu-starter"
+type: 'code_editor_scratch'
+build: true

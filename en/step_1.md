@@ -1,45 +1,21 @@
 ## What you will make
-OR
-## What you will do - change meta if you use this
 
-A brief description - one or two sentences. 
+Build a **Lazy Tofu!** game in Scratch. Help Tofu the Platypus swim for food while avoiding the trees and rubbish in the river.
 
---- print-only ---
+Click the green flag, then use **space** to wake Tofu. Use the **left and right arrow keys** to swim. Food adds points; rubbish and trees cost health. Try the speed slider when you're ready for a faster river.
 
-![ALT TEXT](images/IMAGE.png)
+> [!NOPRINT]
+>
+> <div class="scratch-preview">
+>  <iframe title="Play the completed Lazy Tofu game" allowtransparency="true" width="485" height="402" src="https://scratch.mit.edu/projects/embed/1438005262/?autostart=false" frameborder="0" allowfullscreen></iframe>
+> </div>
+>
+> [Open the completed game in Scratch](https://scratch.mit.edu/projects/1438005262/){:target="_blank"}.
 
---- /print-only ---
+> [!PRINTONLY]
+>
+> ![The finished Lazy Tofu game, with Tofu, food and rubbish in the river and plants on both banks.](images/banner.png)
 
---- no-print ---
+You'll make the river appear to flow by moving clones past Tofu. Build one river bank, reuse your code on the other, then add food, sounds and Tofu's full wake-up animation.
 
-[Editor embed](https://editor.raspberrypi.org/en/embed/viewer/project-slug)
-
---- /no-print ---
-
---- no-print ---
-
-Video embed
-
-<video width="640" height="360" controls>
-<source src="images/videoname.mp4" type="video/mp4">
-</video>
-
-Youtube embed 
-<html>
-<div style="position: relative; overflow: hidden; padding-top: 56.25%;">
-<iframe style="position: absolute; top: 0; left: 0; right: 0; width: 100%; height: 100%; border: none;" src="https://www.youtube.com/embed/XXXXXXXXX?rel=0&cc_load_policy=1" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share">
-</iframe>
-</div><br>
-</html>
-
-Scratch embed
-<div class="scratch-preview">
- <iframe allowtransparency="true" width="485" height="402" src="https://scratch.mit.edu/projects/embed/XXXXXXXXX/?autostart=false" frameborder="0"></iframe>
-</div>
-
---- /no-print ---
-
-### You will need:
-- a
-- b
-- c
+The Tofu the Platypus sprite was submitted as part of the ‘Your Club, Your Sprite’ initiative by Gabriella van Niekerk from Holy Cross Coding club in South Africa.

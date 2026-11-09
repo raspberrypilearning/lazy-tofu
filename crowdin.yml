@@ -11,3 +11,4 @@ files:
       - /en/**/*.pdf
       - /en/**/*.mp3
       - /en/**/*.zip
+      - /en/**/*.sb3

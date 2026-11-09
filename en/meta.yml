@@ -1,14 +1,26 @@
-title: Project title in sentence case
+title: Lazy Tofu!
 hero_image: images/banner.png
-description: A short description of the project
+description: Code a Scratch game where Tofu the Platypus swims for food and dodges trees and rubbish.
 listed: false
 pdf: false
 steps:
   - title: What you will make
-  - title: Step title
+  - title: Open the starter project
+  - title: Make Tofu swim
     completion:
-      - engaged      
-  - title: Challenge
+      - engaged
+  - title: Make the river scroll
+  - title: Grow grass on the banks
+  - title: Add river ripples
+  - title: Float food and rubbish
+  - title: Collect food and dodge rubbish
+  - title: Watch out for trees
+  - title: Wake Tofu up
+  - title: Jump into the river
+  - title: Add music and choose the speed
+    completion:
+      - internal
+  - title: Make it your own
     challenge: true
     completion:
       - external
