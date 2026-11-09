@@ -26,4 +26,6 @@ The offline completed game is byte-identical to the previously runtime-tested ed
 
 After the site import, check the published content and ensure the backend's `editorStarterProject` is empty and `directToEditor` is false. A successful GitHub push alone does not establish this.
 
+The first import reported storage errors while fetching the template's zero-byte `.keep` files. Those placeholders were removed from the now-populated images, resources and solutions directories before retrying the import.
+
 The 259-block offline solution retains the earlier reliability fixes. The supplied playable Scratch example has the original 254-block implementation; this known difference is recorded in the authoring notes.
